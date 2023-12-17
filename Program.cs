@@ -16,7 +16,7 @@ namespace Practice_Linq
 
             Query1(games);
             Query2(games);
-            //Query3(games);
+            Query3(games);
             //Query4(games);
             //Query5(games);
             //Query6(games);
@@ -48,7 +48,10 @@ namespace Practice_Linq
         {
             //Query 1: Вивести всі матчі, які відбулися в Україні у 2012 році.
 
-            var selectedGames = games.Where(game => game.Date.Year == 2012 && game.Country.Equals("Ukraine")); // Корегуємо запит !!!
+            var selectedGames = games
+                .Where(game => 
+                    game.Date.Year == 2012 && 
+                    game.Country.Equals("Ukraine")); // Корегуємо запит !!!
 
 
             // Перевірка
@@ -67,8 +70,12 @@ namespace Practice_Linq
         {
             //Query 2: Вивести Friendly матчі збірної Італії, які вона провела з 2020 року.  
 
-            var selectedGames = games.Where(game => game.Tournament.Equals("Friendly") && (game.Home_team.Equals("Italy") || game.Away_team.Equals("Italy")) && game.Date.Year >= 2020);  // Корегуємо запит !!!
-
+            var selectedGames = games
+                .Where(game => 
+                    game.Tournament.Equals("Friendly") && 
+                    (game.Home_team.Equals("Italy") || 
+                    game.Away_team.Equals("Italy")) && 
+                    game.Date.Year >= 2020);  // Корегуємо запит !!!
 
             // Перевірка
             Console.WriteLine("\n======================== QUERY 2 ========================");
@@ -86,13 +93,20 @@ namespace Practice_Linq
         {
             //Query 3: Вивести всі домашні матчі збірної Франції за 2021 рік, де вона зіграла у нічию.
 
-            var selectedGames = games;   // Корегуємо запит !!!
+            var selectedGames = games
+                .Where(game => 
+                    game.Country.Equals("France") && 
+                    game.Home_team.Equals("France") && 
+                    game.Away_score == game.Home_score && game.Date.Year == 2021);   // Корегуємо запит !!!
 
             // Перевірка
             Console.WriteLine("\n======================== QUERY 3 ========================");
 
             // див. приклад як має бути виведено:
-
+            foreach (var game in selectedGames)
+            {
+                Console.WriteLine(game.InfoToString());
+            }
 
         }
 
